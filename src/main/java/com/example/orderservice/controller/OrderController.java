@@ -24,8 +24,6 @@ public class OrderController {
     @PostMapping("/create")
     public void create(@RequestBody OrderRequestDTO order) {
         orderService.save(order);
-        System.out.println("orderService.save(order)");
-
 
     }
 
