@@ -14,17 +14,16 @@ RUN chmod +x gradlew
 # --no-deamon -> 데몬 실행 하지 않음
 #gradle 은 설치되어있는 gradle 은 설치되어 있는  그래들 이용해서 빌드 그래등은 프로젝트에 포함된 그래들을 이용
 #CID에서는 gradlew를 이용해서 작업
-# gradle 종속성 다운로드
 # -x test -> test 제외
-
+# gradle 종속성 다운로드
 RUN ./gradlew dependencies --no-daemon
-
+COPY src /myapp/src
 RUN gradlew clean build --no-deamon -x test
 
 # 자바를 실행하기 위한 작업
 FROM openjdk:17-alpine
 WORKDIR /myapp
 # 프로젝트 빌드로 생성한 jar파일을 런타임 이미지로 복사
-COPY --from=build /myapp/build/*.jar /myapp/orderservice.jar
+COPY --from=build /myapp/build/libs/*.jar /myapp/orderservice.jar
 EXPOSE 9200
 ENTRYPOINT ["java", "-jar", "/orderservice.jar"]
