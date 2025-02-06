@@ -10,7 +10,7 @@ COPY . /myapp
 #CID에서는 gradlew를 이용해서
 # -x test -> test 제외
 RUN chmod +x gradlew
-RUN gradle clean build --no-deamon -x test
+RUN gradlew clean build --no-deamon -x test
 
 # 자바를 실행하기 위한 작업
 FROM openjdk:17-alpine
