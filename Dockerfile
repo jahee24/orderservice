@@ -4,9 +4,9 @@ WORKDIR /myapp
 # 호스트머신에 소스코드를 이미지 작업 디렉토리로 복사
 COPY . /myapp
 
-COPY gradle /myapp/gradle
-COPY gradlew /myapp/
-COPY build.gradle settings.gradle /myapp/
+#COPY gradle /myapp/gradle
+#COPY gradlew /myapp/
+#COPY build.gradle settings.gradle /myapp/
 RUN chmod +x gradlew
 
 # 이전 빌드에서 생성된 모든 build/ 디렉토리내용을 삭제, 새롭게 빌드
@@ -16,9 +16,9 @@ RUN chmod +x gradlew
 #CID에서는 gradlew를 이용해서 작업
 # -x test -> test 제외
 # gradle 종속성 다운로드
-RUN ./gradlew dependencies --no-daemon
-COPY src /myapp/src
-RUN gradlew clean build --no-deamon -x test
+#RUN ./gradlew dependencies --no-daemon
+#COPY src /myapp/src
+RUN ./gradlew clean build --no-deamon -x test
 
 # 자바를 실행하기 위한 작업
 FROM openjdk:17-alpine
